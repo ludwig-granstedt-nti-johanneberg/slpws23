@@ -1,0 +1,28 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    mustermann (3.0.0)
+      ruby2_keywords (~> 0.0.1)
+    rack (2.2.6.2)
+    rack-protection (3.0.5)
+      rack
+    ruby2_keywords (0.0.5)
+    sinatra (3.0.5)
+      mustermann (~> 3.0)
+      rack (~> 2.2, >= 2.2.4)
+      rack-protection (= 3.0.5)
+      tilt (~> 2.0)
+    sqlite3 (1.6.0-x64-mingw-ucrt)
+    tilt (2.0.11)
+    webrick (1.7.0)
+
+PLATFORMS
+  x64-mingw-ucrt
+
+DEPENDENCIES
+  sinatra (~> 3.0)
+  sqlite3 (~> 1.6)
+  webrick (~> 1.7)
+
+BUNDLED WITH
+   2.3.7
