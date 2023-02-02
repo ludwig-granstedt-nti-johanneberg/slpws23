@@ -101,5 +101,4 @@ CREATE TABLE IF NOT EXISTS "Users-Friends" (
 	FOREIGN KEY("friend") REFERENCES "Users"("id"),
 	FOREIGN KEY("user") REFERENCES "Users"("id")
 );
-INSERT INTO "Teams" VALUES (1,'test');
 COMMIT;

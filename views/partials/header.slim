@@ -1,0 +1,26 @@
+header
+    a#logo-link href="/" 
+        img#logo src="/images/logo.png" alt="Logo"
+    
+    nav#main-nav
+        menu#quick-nav 
+            // TODO: Add links here
+        form#search-form action="/search" method="get"
+            input#search type="text" name="q" placeholder="Search"
+            input#search-submit type="submit" value="Search"
+
+        - if user
+            #user-nav
+                #user-nav-button 
+                    img#user-nav-avatar src="/userdata/avatars/#{user["id"]}" alt="Avatar"
+                menu#user-nav-dropdown
+                    a#user-nav-link href="/#{user["username"]}" Profile
+                    a#user-nav-link href="/logout" Logout
+
+        - else
+            #login-options
+                a#user-nav-link href="/login" Login
+                a#user-nav-link href="/register" Register
+
+
+        

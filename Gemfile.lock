@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    multi_json (1.15.0)
     mustermann (3.0.0)
       ruby2_keywords (~> 0.0.1)
     rack (2.2.6.2)
@@ -12,15 +13,24 @@ GEM
       rack (~> 2.2, >= 2.2.4)
       rack-protection (= 3.0.5)
       tilt (~> 2.0)
+    sinatra-contrib (3.0.5)
+      multi_json
+      mustermann (~> 3.0)
+      rack-protection (= 3.0.5)
+      sinatra (= 3.0.5)
+      tilt (~> 2.0)
+    sinatra-reloader (1.0)
+      sinatra-contrib
     sqlite3 (1.6.0-x64-mingw-ucrt)
     tilt (2.0.11)
-    webrick (1.7.0)
+    webrick (1.8.1)
 
 PLATFORMS
   x64-mingw-ucrt
 
 DEPENDENCIES
   sinatra (~> 3.0)
+  sinatra-reloader (~> 1.0)
   sqlite3 (~> 1.6)
   webrick (~> 1.7)
 
