@@ -1,0 +1,9 @@
+@use "components\\header";
+@use "meta\\font" as font;
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    
+    font-family: font.$default-font;
+}

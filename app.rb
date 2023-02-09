@@ -1,6 +1,8 @@
 require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'sqlite3'
+require 'slim'
+
 require './lib/db.rb'
 require './lib/user.rb'
 
@@ -27,7 +29,10 @@ get '/' do
 end
 
 get '/welcome' do
-    
+    slim :welcome, locals: {
+        user: session[:user_id],
+        title: 'Welcome'
+    }
 end
 
 get '/login' do

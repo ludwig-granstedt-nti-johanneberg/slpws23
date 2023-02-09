@@ -11,3 +11,5 @@ gem "sqlite3", "~> 1.6"
 gem "webrick", "~> 1.7"
 
 gem "sinatra-reloader", "~> 1.0"
+
+gem "slim", "~> 5.0"
