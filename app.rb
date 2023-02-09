@@ -8,6 +8,8 @@ require './lib/user.rb'
 
 enable :sessions
 
+set :slim, :layout => :'layouts/default'
+
 helpers do
 end
 
@@ -24,7 +26,7 @@ end
 
 get '/' do
     slim :index, locals: {
-        user: session[:user_id]
+        user_id: session[:user_id]
     }
 end
 
@@ -55,29 +57,24 @@ post '/logout' do
 
 end
 
-get '/:username' do
-    # TODO: Match path against database
-
-    db = SQLite3::Database.new('db/database.db')
-    db.results_as_hash = true
-    matches = db.execute("SELECT * FROM users WHERE username = ?", params[:username])
-
-    if matches.length == 0
-        redirect '/'
-    end
-
-    match = matches.first
-
-    slim :profile, locals: {
-
-    }
-
-end
-
 get '/search' do
     
 end
 
 get '/userdata/*' do
+
+end
+
+before '/:username/*' do
+    pass if !is_user(params[:username])
+end
+
+get '/:username' do
+    
+    user = get_user_data(params[:username])
+
+    slim :profile, locals: {
+        user: user,
+    }
 
 end

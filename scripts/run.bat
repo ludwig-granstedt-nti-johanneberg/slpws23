@@ -1,0 +1,1 @@
+D:\Ruby31-x64\bin\bundle.bat exec ruby %~dp0\..\app.rb

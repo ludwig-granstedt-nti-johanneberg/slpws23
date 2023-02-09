@@ -13,3 +13,7 @@ gem "webrick", "~> 1.7"
 gem "sinatra-reloader", "~> 1.0"
 
 gem "slim", "~> 5.0"
+
+gem "bcrypt", "~> 3.1"
+
+gem "jwt", "~> 2.7"
