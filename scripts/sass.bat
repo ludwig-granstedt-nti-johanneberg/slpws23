@@ -1,1 +1,1 @@
-C:\Users\ludwi\AppData\Local\Sass\sass.bat --watch %~dp0\..\sass\style.scss:%~dp0..\public\css\style.css
+sass --watch %~dp0\..\..\sass\style.scss:%~dp0..\public\css\style.css

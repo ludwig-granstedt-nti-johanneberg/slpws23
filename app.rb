@@ -18,21 +18,24 @@ restricted_paths = [
     '/logout',
 ]
 
-# TODO: Revrite with regex
+# TODO: Maybe switch from checking restricted paths to checking allowed paths
 before do
     pass if !restricted_paths.include?(request.path_info)
     redirect '/welcome' unless logged_in?
 end
 
 get '/' do
+    # TODO: fetch user data from database
     slim :index, locals: {
-        user_id: session[:user_id]
+        user: nil,
+        title: 'Home'
     }
 end
 
 get '/welcome' do
+    # TODO: fetch user data from database
     slim :welcome, locals: {
-        user: session[:user_id],
+        user: nil,
         title: 'Welcome'
     }
 end
