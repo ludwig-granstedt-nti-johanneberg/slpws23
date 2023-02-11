@@ -9,12 +9,12 @@ header
             input#search type="text" name="q"
             input#search-submit type="submit" value="Search"
 
-        - if user
+        - if @user
             #user-nav
                 #user-nav-button 
-                    img#user-nav-avatar src="/userdata/avatars/#{user["id"]}" alt="Avatar"
+                    img#user-nav-avatar src="/userdata/avatars/#{@user["id"]}" alt="Avatar"
                 menu#user-nav-dropdown
-                    a#user-nav-link href="/#{user["username"]}" Profile
+                    a#user-nav-link href="/#{@user["username"]}" Profile
                     a#user-nav-link href="/logout" Logout
 
         - else
