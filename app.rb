@@ -98,29 +98,26 @@ get '/userdata/*' do
 
 end
 
-before '/:username/*' do
-    pass if Account.exists?(params[:username])
-    redirect '/404'
+get '/404' do
+    slim :not_found, locals: {
+        title: '404'
+    }
 end
 
-get '/:username' do
-    
-    user = get_user_data(params[:username])
+get '/:username' do |username|
+    pass unless Account.exists?(username)
+
+    user = get_user_data(username)
 
     slim :profile, locals: {
-        title: params[:username],
+        title: username,
         user: user,
     }
 end
 
-get '404' do
-    body = slim :'not_found', locals: {
-        title: '404'
-    }
-
-    [404, body]
-end
-
 not_found do
-    redirect '/404'
+    status 404
+    slim :not_found, locals: {
+        title: '404'
+    } 
 end
