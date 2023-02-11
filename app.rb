@@ -21,7 +21,7 @@ RESTRICTED_PATHS = [
 ]
 
 before /#{RESTRICTED_PATHS.map{|str| "(#{str})"}.join('|')}/ do
-    redirect '/' unless logged_in?
+    redirect '/' unless logged_in?(request)
 end
 
 before do
@@ -32,7 +32,7 @@ before do
     if reason == "Token expired"
         SessionToken.delete_token(request.cookies["session_token"])
         response.delete_cookie("session_token")
-        redirect '/login'
+        redirect '/'
     end
 
     @user = get_user_data(token["user_id"])
@@ -51,51 +51,65 @@ if development?
 end
 
 get '/' do
-    # TODO: fetch user data from database
     slim :index, locals: {
         title: 'Home'
     }
 end
 
 get '/welcome' do
-    # TODO: fetch user data from database
     slim :welcome, locals: {
         title: 'Welcome'
     }
 end
 
-get '/login' do
-    slim :login, :layout => :'layouts/login', locals: {
-        title: 'Login',
-        user: nil
+get '/signin' do
+    slim :signin, :layout => :'layouts/account', locals: {
+        title: 'Sign in',
+        error: params["error"]
     }
-    
 end
 
-post '/login' do
+post '/signin' do
+    result, reason = Account.login(response, params["username"], params["password"], params["remember_me"] == "true")
+    
+    if result == nil
+        redirect '/signin?error=' + reason
+    end
 
+    redirect '/'
 end
 
 get '/signup' do
-
+    slim :signup, :layout => :'layouts/account', locals: {
+        title: 'Sign up',
+        error: params["error"]
+    }
 end
 
 post '/signup' do
+    result, reason = Account.signup(response, params["username"], params["password"])
+    
+    if result == nil
+        redirect '/signup?error=' + reason
+    end
 
+    redirect '/'
 end
 
-post '/logout' do
+get '/logout' do
     Account.logout(response, request.cookies["session_token"])
 
     redirect '/'
 end
 
 get '/search' do
-    
+    # TODO: Implement search function
 end
 
 get '/userdata/*' do
+    # TODO: Match this agianst database for user
 
+    404
 end
 
 get '/404' do

@@ -1,0 +1,26 @@
+main#signin
+    .account-box
+        h1 Sign in
+
+        form#signin-form.account-form method="post" action="/signin"
+            .input-wrapper#username-input
+                label#username-label for="username-box" Username
+                input#username-box type="text" name="username" placeholder="Username" required="true"
+
+            .input-wrapper#password-input
+                label#password-label for="password-box" Password
+                input#password-box type="password" name="password" placeholder="Password" required="true"
+
+            #remember-me-wrapper
+                input#remember-me-box type="checkbox" name="remember_me" value="true"
+                label#remember-me-label for="remember-me-box" Remember me
+
+            input#submit-button type="submit" value="Sign in"
+
+        - if error != nil
+            div#error-message
+                p= error
+
+        #signup-link
+            p Don't have an account? 
+            a href="/signup" Sign up
