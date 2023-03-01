@@ -10,6 +10,7 @@ header
             input#search-submit type="submit" value="Search"
 
         - if @user
+            // FIXME: I think this is not aligned properly
             #user-nav
                 #user-nav-button 
                     img#user-nav-avatar src="/userdata/avatars/#{@user["id"]}" alt="Avatar"

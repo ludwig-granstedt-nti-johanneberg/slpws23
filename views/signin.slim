@@ -7,6 +7,7 @@ main#signin
                 label#username-label for="username-box" Username
                 input#username-box type="text" name="username" placeholder="Username" required="true"
 
+            // TODO: Add forgot password link
             .input-wrapper#password-input
                 label#password-label for="password-box" Password
                 input#password-box type="password" name="password" placeholder="Password" required="true"
@@ -17,6 +18,7 @@ main#signin
 
             input#submit-button type="submit" value="Sign in"
 
+        // TODO: Find a way to display this
         - if error != nil
             div#error-message
                 p= error

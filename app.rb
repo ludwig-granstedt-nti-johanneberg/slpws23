@@ -87,6 +87,8 @@ get '/signup' do
 end
 
 post '/signup' do
+    # TODO: Add email field to database
+
     result, reason = Account.signup(response, params["username"], params["password"])
     
     if result == nil
