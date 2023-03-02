@@ -8,9 +8,10 @@ require './lib/user.rb'
 
 enable :sessions
 
-set :slim, :layout => :'layouts/default'
-
 helpers do
+    def logged_in?
+        session[:token] != nil
+    end
 end
 
 restricted_paths = [
@@ -68,16 +69,22 @@ get '/userdata/*' do
 
 end
 
-before '/:username/*' do
-    pass if !is_user(params[:username])
-end
-
 get '/:username' do
-    
-    user = get_user_data(params[:username])
 
-    slim :profile, locals: {
-        user: user,
+    # temporary botch while I don't have access to the commits containing the account system
+    @user = {
+        "username" => params[:username],
+        "id" => 1
+    }
+
+    profile = {
+        "username" => params[:username],
+        "id" => 1
+    }
+
+    slim :profile, layout: :'layouts/profile', locals: {
+        profile: profile,
+        title: profile[:username]
     }
 
 end

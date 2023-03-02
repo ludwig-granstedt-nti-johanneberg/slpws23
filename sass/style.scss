@@ -1,5 +1,7 @@
-@use "components\\header";
-@use "meta\\font" as font;
+@use "components/header";
+@use "meta/font" as font;
+
+@use "pages/profile";
 
 * {
     box-sizing: border-box;

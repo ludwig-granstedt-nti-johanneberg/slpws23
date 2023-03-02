@@ -21,11 +21,11 @@ module User
         db = open_db(MAIN_DATABASE)
         matches = db.execute("SELECT * FROM Users WHERE username = ?", username)
 
-        return nil, "User doesn't exist" if matches.length == 0
+        return [nil, "User doesn't exist"] if matches.length == 0
 
         user = matches.first
 
-        return nil, "Incorrect password" if BCrypt::Password.new(user["password"]) != password
+        return [nil, "Incorrect password"] if BCrypt::Password.new(user["password"]) != password
 
         token = generate_token(username)
 
@@ -34,7 +34,7 @@ module User
 
         db.execute("INSERT INTO SessionTokens (token, user_id, expiration_date) VALUES (?, ?, ?)", token, user["id"], expiration_date)
 
-        token
+        [token, nil]
     end
 
     def logout(token)
@@ -46,7 +46,7 @@ module User
         db = open_db(MAIN_DATABASE)
         matches = db.execute("SELECT * FROM Users WHERE username = ?", username)
 
-        return nil, "User already exists" if matches.length > 0
+        return [nil, "User already exists"] if matches.length > 0
 
         password = BCrypt::Password.create(password)
 
@@ -62,13 +62,13 @@ module User
         db = open_db(MAIN_DATABASE)
         matches = db.execute("SELECT * FROM SessionTokens INNER JOIN Users ON SessionTokens.user_id = Users.id WHERE SessionTokens.token = ?", token)
 
-        return nil, "Invalid token" if matches.length == 0
+        return [nil, "Invalid token"] if matches.length == 0
 
         user = matches.first
 
-        return nil, "Token has expired" if user["expiration_date"] != nil && user["expiration_date"] < Time.now.to_i
+        return [nil, "Token has expired"] if user["expiration_date"] != nil && user["expiration_date"] < Time.now.to_i
 
-        payload, nil
+        [payload, nil]
     end
     
     def generate_token(username)
