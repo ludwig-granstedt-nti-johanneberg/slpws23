@@ -2,8 +2,6 @@ require 'sqlite3'
 
 MAIN_DATABASE = "db/main.db"
 
-# TODO: Figure out why the program insists on creating a db/database.db file instead of opening db/main.db
-
 def open_db(path)
     db = SQLite3::Database.new(path)
     db.results_as_hash = true

@@ -66,6 +66,119 @@ a#edit-profile-button {
   align-self: flex-start;
 }
 
+main#signin,
+main#signup {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to bottom right, #fff, #dc97ff 70%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.account-box {
+  width: fit-content;
+  height: fit-content;
+  margin-top: 7rem;
+  padding: 1.5rem;
+  border-radius: 20px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+}
+.account-box > * {
+  margin-bottom: 1rem;
+}
+.account-box h1 {
+  font-weight: normal;
+}
+.account-box input[type=text], .account-box input[type=password], .account-box input[type=email] {
+  width: 300px;
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #bd68ee;
+}
+.account-box input[type=submit] {
+  width: 300px;
+  margin-top: 1rem;
+  grid-area: submit;
+  justify-self: center;
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #bd68ee;
+  background-color: #bd68ee;
+  color: #fff;
+  font-weight: bold;
+}
+.account-box .input-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.account-box .input-wrapper label {
+  margin-bottom: 0.5rem;
+}
+
+form.account-form {
+  display: grid;
+  row-gap: 1rem;
+  column-gap: 1rem;
+}
+
+form#signin-form {
+  width: 300px;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto auto;
+  grid-template-areas: "username" "password" "remember" "submit";
+}
+form#signin-form #username-input {
+  grid-area: username;
+}
+form#signin-form #password-input {
+  grid-area: password;
+}
+form#signin-form #remember-me-wrapper {
+  grid-area: remember;
+  display: flex;
+  align-items: center;
+}
+form#signin-form #remember-me-wrapper input {
+  margin-right: 0.5rem;
+}
+
+form#signup-form {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto auto;
+  grid-template-areas: "username ." "email email-confirm" "password password-confirm" "submit submit";
+}
+form#signup-form #username-wrapper {
+  grid-area: username;
+}
+form#signup-form #email-wrapper {
+  grid-area: email;
+}
+form#signup-form #email-confirm-wrapper {
+  grid-area: email-confirm;
+}
+form#signup-form #password-wrapper {
+  grid-area: password;
+}
+form#signup-form #password-confirm-wrapper {
+  grid-area: password-confirm;
+}
+form#signup-form #signup-submit {
+  grid-area: submit;
+}
+
+#signup-link, #signin-link {
+  margin-bottom: 0;
+  font-size: 0.8rem;
+  align-self: center;
+}
+#signup-link *, #signin-link * {
+  display: inline-block;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
