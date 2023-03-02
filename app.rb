@@ -10,11 +10,8 @@ ADMIN_PASSWORD = 'AsfaltsoppaMedKorvOchHjortronsylt'
 
 enable :sessions
 
-<<<<<<< HEAD
-=======
 set :slim, :pretty => true
 
->>>>>>> 70fd92b395ce1c83e56a2cb51bd481d813b2dea2
 helpers do
     def logged_in?
         session[:token] != nil
