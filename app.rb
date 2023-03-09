@@ -1,5 +1,5 @@
 require 'sinatra'
-require 'sinatra/reloader' if development?
+require 'sinatra/reloader'
 require 'sqlite3'
 require 'slim'
 
@@ -13,8 +13,18 @@ enable :sessions
 set :slim, :pretty => true
 
 helpers do
-    def logged_in?
-        session[:token] != nil
+    def is_logged_in?
+        logged_in?(request)
+    end
+
+    def get_teams(user)
+        db = open_db(MAIN_DATABASE)
+        db.execute("SELECT * FROM Teams WHERE user_id = ?", user["id"])
+    end
+
+    def get_team_pokemon(team)
+        db = open_db(MAIN_DATABASE)
+        db.execute("SELECT * FROM TeamPokemon INNER JOIN PokemonSpecies ON TeamPokemon.species_id = PokemonSpecies.id WHERE TeamPokemon.team_id = ?", team["id"])
     end
 end
 
@@ -92,7 +102,7 @@ end
 post '/signup' do
     # TODO: Add email field to database
 
-    result, reason = Account.signup(response, params["username"], params["password"])
+    result, reason = Account.signup(response, params["username"], params["password"], params["email"])
     
     if result == nil
         redirect '/signup?error=' + reason
@@ -124,13 +134,13 @@ get '/404' do
 end
 
 get '/:username' do |username|
-    pass unless Account.exists?(username)
+    pass unless Account.exists?(username, false)
 
-    user = get_user_data(username)
+    user = Account.get_data(username, false)
 
-    slim :profile, layout: :'layouts/profile', locals: {
+    slim :'profile/index', layout: :'layouts/profile', locals: {
         title: username,
-        user: user,
+        profile: user,
     }
 end
 

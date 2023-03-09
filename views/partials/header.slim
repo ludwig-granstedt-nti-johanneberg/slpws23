@@ -9,7 +9,7 @@ header
             input#search type="text" name="q"
             input#search-submit type="submit" value="Search"
 
-        - if logged_in?
+        - if is_logged_in?
             #user-nav
                 #user-nav-button 
                     img#user-nav-avatar src="/userdata/avatars/#{@user["id"]}" alt="Avatar"

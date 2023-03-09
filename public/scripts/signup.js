@@ -17,7 +17,7 @@ form.addEventListener("submit", (event) => {
     let email = document.getElementById("email-input");
     let emailConfirm = document.getElementById("email-confirm-input");
 
-    if (email.value != username.value) {
+    if (email.value != emailConfirm.value) {
         email.value = "";
         emailConfirm.value = "";
 

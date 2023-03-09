@@ -16,7 +16,7 @@ html lang="en"
             img#profile-picture src="/userdata/profile-pictures/#{profile["id"]}" alt="user icon"/
             h1 = profile["username"]
 
-            - if logged_in? && profile.id == @user["id"]
+            - if is_logged_in? && profile["id"] == @user["id"]
                 a#edit-profile-button href="/profile/edit" Edit profile
 
         ==yield

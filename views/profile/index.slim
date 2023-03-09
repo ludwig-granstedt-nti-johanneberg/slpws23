@@ -1,0 +1,15 @@
+section.main-content
+    h2 #{profile["username"]}'s teams
+
+    ul#teams-list
+        - get_teams(profile).each do |team|
+            li.team
+                h3.team-heading
+                    a href="/#{profile["username"].downcase}/teams/#{team["id"]}" = team["name"]
+
+                ul.team-pokemon
+                    - get_team_pokemon(team).each do |pokemon|
+                        li.pokemon
+                            // TODO: Add info here (sprite, etc.)
+
+                

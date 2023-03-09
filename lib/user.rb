@@ -43,7 +43,7 @@ module Account
         response.delete_cookie("session_token")
     end
     
-    def Account.signup(response, username, password)
+    def Account.signup(response, username, password, email)
         db = open_db(MAIN_DATABASE)
         matches = db.execute("SELECT * FROM Users WHERE username = ?", username)
 
@@ -63,11 +63,20 @@ module Account
         [token, nil]
     end
 
-    def Account.exists?(username)
+    def Account.exists?(username, case_sensitive = true)
         db = open_db(MAIN_DATABASE)
-        matches = db.execute("SELECT * FROM Users WHERE username = ?", username)
+        matches = db.execute("SELECT * FROM Users WHERE username = ?#{" COLLATE NOCASE" if !case_sensitive};", username)
 
         matches.length > 0
+    end
+
+    def Account.get_data(username, case_sensitive = true)
+        db = open_db(MAIN_DATABASE)
+        matches = db.execute("SELECT * FROM Users WHERE username = ?#{" COLLATE NOCASE" if !case_sensitive};", username)
+
+        return nil if matches.length == 0
+
+        matches.first
     end
 end
 
