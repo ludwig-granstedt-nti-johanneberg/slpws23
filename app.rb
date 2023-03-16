@@ -68,6 +68,25 @@ if development?
     end
 end
 
+before '/admin/*' do
+    redirect '/forbidden' unless logged_in?(request) && Account.is_admin?(@user["id"])
+end
+
+get '/admin/manage_users' do
+    slim :'admin/manage_users', locals: {
+        title: 'Manage users',
+        users: Account.get_all_users()
+    }
+end
+
+post '/admin/generate_default_images' do
+    Account.get_all_users().each do |user|
+        ProfilePicture.generate_default(user["id"])
+    end
+
+    redirect '/admin/manage_users'
+end
+
 get '/' do
     slim :index, locals: {
         title: 'Home'
@@ -128,10 +147,6 @@ get '/teams/create' do
     slim :'teams/create', locals: {
         title: 'Create team'
     }
-end
-
-before '/admin/*' do
-    redirect '/forbidden' unless logged_in?(request) && Account.is_admin(@user["id"])
 end
 
 get '/404' do

@@ -3,6 +3,7 @@ require 'bcrypt'
 require 'sinatra'
 
 require './lib/database.rb'
+require './lib/image.rb'
 
 HMAC_SECRET = "pasta-carbonara-with-hamburger-dressing"
 
@@ -52,6 +53,10 @@ module Account
         password = BCrypt::Password.create(password)
 
         db.execute("INSERT INTO Users (username, password_digest, email) VALUES (?, ?, ?)", username, password, email)
+
+        user = db.execute("SELECT id FROM Users WHERE username = ?", username).first
+
+        ProfilePicture.generate_default(user["id"])
         
         result, reason = SessionToken.generate_token(username, false)
         return [nil, reason] if result == nil
@@ -81,9 +86,14 @@ module Account
 
     def Account.is_admin?(id)
         db = open_db(MAIN_DATABASE)
-        matches = db.execute("SELECT * FROM Users WHERE id = ? AND admin = 1;", id)
+        matches = db.execute("SELECT * FROM Users WHERE id = ? AND is_admin = 1;", id)
 
         matches.length > 0
+    end
+
+    def Account.get_all_users
+        db = open_db(MAIN_DATABASE)
+        db.execute("SELECT * FROM Users;")
     end
 end
 

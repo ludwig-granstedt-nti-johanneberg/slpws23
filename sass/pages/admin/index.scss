@@ -1,0 +1,10 @@
+@use "manage_users";
+@use "../../meta/color.scss" as color;
+@use "../../components/button.scss" as button;
+
+.action-button {
+    display: inline-block;
+    width: fit-content;
+
+    @include button.button;
+}

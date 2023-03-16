@@ -12,8 +12,9 @@ header
         - if is_logged_in?
             #user-nav
                 #user-nav-button 
-                    img#user-nav-avatar src="/userdata/avatars/#{@user["id"]}" alt="Avatar"
-                menu#user-nav-dropdown
+                    img#user-nav-avatar src="/images/profile/#{@user["username"].downcase}.jpg" alt="Avatar"
+                    .dropdown-caret
+                menu#user-nav-dropdown.hidden
                     a#user-nav-link href="/#{@user["username"]}" Profile
                     a#user-nav-link href="/logout" Logout
 

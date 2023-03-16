@@ -1,8 +1,7 @@
 @use "components/header";
 @use "meta/font" as font;
 
-@use "pages/profile";
-@use "pages/account";
+@use "pages";
 
 * {
     box-sizing: border-box;

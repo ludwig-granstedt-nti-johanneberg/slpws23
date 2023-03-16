@@ -17,3 +17,5 @@ gem "slim", "~> 5.0"
 gem "bcrypt", "~> 3.1"
 
 gem "jwt", "~> 2.7"
+
+gem "down", "~> 5.4"
