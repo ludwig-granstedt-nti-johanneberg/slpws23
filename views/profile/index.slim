@@ -1,6 +1,9 @@
 section.main-content
     h2 #{profile["username"]}'s teams
 
+    - if is_logged_in? && profile["id"] == @user["id"]
+        a#new-team-button href="/teams/new" New team
+
     ul#teams-list
         - get_teams(profile).each do |team|
             li.team
@@ -10,6 +13,6 @@ section.main-content
                 ul.team-pokemon
                     - get_team_pokemon(team).each do |pokemon|
                         li.pokemon
-                            // TODO: Add info here (sprite, etc.)
+                            p = pokemon
 
                 

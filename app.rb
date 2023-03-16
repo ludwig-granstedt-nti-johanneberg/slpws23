@@ -26,6 +26,11 @@ helpers do
         db = open_db(MAIN_DATABASE)
         db.execute("SELECT * FROM TeamPokemon INNER JOIN PokemonSpecies ON TeamPokemon.species_id = PokemonSpecies.id WHERE TeamPokemon.team_id = ?", team["id"])
     end
+
+    def get_all_pokemon
+        db = open_db(MAIN_DATABASE)
+        db.execute("SELECT * FROM PokemonSpecies")
+    end
 end
 
 RESTRICTED_PATHS = [
@@ -100,8 +105,6 @@ get '/signup' do
 end
 
 post '/signup' do
-    # TODO: Add email field to database
-
     result, reason = Account.signup(response, params["username"], params["password"], params["email"])
     
     if result == nil
@@ -121,10 +124,14 @@ get '/search' do
     # TODO: Implement search function
 end
 
-get '/userdata/*' do
-    # TODO: Match this agianst database for user
+get '/teams/create' do
+    slim :'teams/create', locals: {
+        title: 'Create team'
+    }
+end
 
-    404
+before '/admin/*' do
+    redirect '/forbidden' unless logged_in?(request) && Account.is_admin(@user["id"])
 end
 
 get '/404' do
@@ -144,9 +151,16 @@ get '/:username' do |username|
     }
 end
 
+get '/forbidden' do
+    status 403
+    slim :forbidden, locals: {
+        title: 'Permission denied'
+    }
+end
+
 not_found do
     status 404
     slim :not_found, locals: {
-        title: '404'
+        title: 'Not found'
     } 
 end

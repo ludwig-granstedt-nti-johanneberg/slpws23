@@ -51,7 +51,7 @@ module Account
 
         password = BCrypt::Password.create(password)
 
-        db.execute("INSERT INTO Users (username, password_digest) VALUES (?, ?)", username, password)
+        db.execute("INSERT INTO Users (username, password_digest, email) VALUES (?, ?, ?)", username, password, email)
         
         result, reason = SessionToken.generate_token(username, false)
         return [nil, reason] if result == nil
@@ -77,6 +77,13 @@ module Account
         return nil if matches.length == 0
 
         matches.first
+    end
+
+    def Account.is_admin?(id)
+        db = open_db(MAIN_DATABASE)
+        matches = db.execute("SELECT * FROM Users WHERE id = ? AND admin = 1;", id)
+
+        matches.length > 0
     end
 end
 
