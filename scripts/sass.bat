@@ -1,1 +1,0 @@
-sass --watch %~dp0\..\sass\style.scss:%~dp0\..\public\css\style.css

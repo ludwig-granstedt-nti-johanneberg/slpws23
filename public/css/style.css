@@ -15,7 +15,7 @@ nav#main-nav {
   justify-content: space-between;
   align-items: center;
 }
-nav#main-nav * {
+nav#main-nav > * {
   margin: 0 10px;
 }
 nav#main-nav a {
@@ -39,31 +39,176 @@ form#search-form input#search {
   border-radius: 30px 0 0 30px;
   padding-left: 20px;
 }
+form#search-form input#search:focus {
+  outline: none;
+}
 form#search-form input#search-submit {
   width: 30%;
   height: 100%;
   border: none;
   border-radius: 0 30px 30px 0;
   background-color: #ab15e3;
+  color: #000;
+}
+form#search-form input#search-submit:hover {
+  background-color: #9913cc;
+  cursor: pointer;
 }
 
-#profile-summary {
-  width: 364px;
+nav#user-nav {
+  height: 60px;
+  position: relative;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
 }
 
-#profile-picture {
-  width: 272px;
-  height: 272px;
-  margin-top: 46px;
-  margin-bottom: 23px;
+#user-nav-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+#user-nav-button a {
+  color: #fff;
+  text-decoration: none;
+}
+#user-nav-button img#user-nav-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 
-a#edit-profile-button {
-  justify-self: flex-end;
-  align-self: flex-start;
+.dropdown-caret {
+  border-bottom-color: #0000;
+  border-left-color: #0000;
+  border-right-color: #0000;
+  border-style: solid;
+  border-width: var(--primer-borderWidth-thicker, 4px) var(--primer-borderWidth-thicker, 4px) 0;
+  content: "";
+  display: inline-block;
+  height: 0;
+  vertical-align: middle;
+  width: 0;
+  color: white;
+}
+
+#user-nav-dropdown {
+  width: 150px;
+  padding: 0px;
+  border: 1px solid #ab51e3;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #000;
+  position: absolute;
+  top: calc(60px + 0.5rem);
+  right: 20px;
+}
+#user-nav-dropdown.hidden {
+  display: none;
+}
+#user-nav-dropdown::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: -16px;
+  right: 9px;
+  border: 8px solid transparent;
+  border-bottom: 8px solid #ab51e3;
+}
+#user-nav-dropdown::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: -14px;
+  right: 10px;
+  border: 7px solid transparent;
+  border-bottom: 7px solid #fff;
+}
+
+menu#user-nav-menu {
+  width: 100%;
+  height: fit-content;
+  list-style: none;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+  animation: open-dropdown 0.2s ease-in-out;
+}
+menu#user-nav-menu li {
+  width: 100%;
+}
+menu#user-nav-menu a {
+  width: 100%;
+  height: 40px;
+  padding: 0.5rem;
+  display: block;
+  color: #000;
+  text-decoration: none;
+}
+menu#user-nav-menu a:hover {
+  background-color: #d283ff;
+}
+
+@keyframes open-dropdown {
+  0% {
+    display: block;
+    height: 0%;
+  }
+  100% {
+    height: fit-content;
+  }
+}
+nav#admin-nav {
+  background-color: #bd68ee;
+  color: #fff;
+}
+nav#admin-nav a {
+  color: #fff;
+}
+
+menu#admin-nav-menu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  list-style: none;
+  padding: 0;
+}
+menu#admin-nav-menu li {
+  padding: 5px 1rem;
+}
+
+menu.action-button-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.action-button-container {
+  margin: 5px;
+  padding: 0px;
+}
+
+.action-button {
+  display: inline-block;
+  width: fit-content;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #d283ff;
+  color: #fff;
+}
+.action-button:hover {
+  background-color: #bf50ff;
+  cursor: pointer;
+}
+.action-button:active {
+  background-color: #ad1dff;
 }
 
 main#signin,
@@ -177,6 +322,25 @@ form#signup-form #signup-submit {
 }
 #signup-link *, #signin-link * {
   display: inline-block;
+}
+
+#profile-summary {
+  width: 364px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#profile-picture {
+  width: 272px;
+  height: 272px;
+  margin-top: 46px;
+  margin-bottom: 23px;
+}
+
+a#edit-profile-button {
+  justify-self: flex-end;
+  align-self: flex-start;
 }
 
 * {

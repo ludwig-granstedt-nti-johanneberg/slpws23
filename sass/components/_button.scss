@@ -1,0 +1,18 @@
+@use "../meta/color.scss" as color;
+
+@mixin button {
+    border-radius: 5px;
+    padding: 5px;
+
+    background-color: color.$button;
+    color: color.$text_inverted;
+
+    &:hover {
+        background-color: color.$button_hover;
+        cursor: pointer;
+    }
+
+    &:active {
+        background-color: color.$button_active;
+    }
+}

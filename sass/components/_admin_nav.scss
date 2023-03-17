@@ -1,0 +1,24 @@
+@use "../meta/color" as color;
+
+nav#admin-nav {
+    background-color: color.$contrast4;
+    color: color.$text_inverted;
+
+    a {
+        color: color.$text_inverted;
+    }
+}
+
+menu#admin-nav-menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+
+    list-style: none;
+    padding: 0;
+
+    li {
+        padding: 5px 1rem;
+    }
+}

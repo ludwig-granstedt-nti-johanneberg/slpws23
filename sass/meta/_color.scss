@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // Src: https://coolors.co/palette/310055-3c0663-4a0a77-5a108f-6818a5-8b2fc9-ab51e3-bd68ee-d283ff-dc97ff
 
 $background: #fff;
@@ -9,3 +11,7 @@ $contrast5: #d283ff;
 $contrast6: #dc97ff;
 $text: #000;
 $text_inverted: #fff;
+
+$button: $contrast5;
+$button_hover: color.adjust($button, $lightness: -10%);
+$button_active: color.adjust($button, $lightness: -20%);

@@ -1,1 +1,0 @@
-bundle exec ruby %~dp0..\app.rb

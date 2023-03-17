@@ -13,7 +13,7 @@ html lang="en"
         ==slim :'partials/header'
 
         #profile-summary
-            img#profile-picture src="/userdata/profile-pictures/#{profile["id"]}" alt="user icon"/
+            img#profile-picture src="/images/profile/#{profile["username"].downcase}.jpg" alt="user icon"/
             h1 = profile["username"]
 
             - if is_logged_in? && profile["id"] == @user["id"]

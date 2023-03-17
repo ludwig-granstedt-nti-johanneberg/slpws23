@@ -10,12 +10,16 @@ header
             input#search-submit type="submit" value="Search"
 
         - if is_logged_in?
-            #user-nav
+            nav#user-nav
                 #user-nav-button 
-                    img#user-nav-avatar src="/userdata/avatars/#{@user["id"]}" alt="Avatar"
-                menu#user-nav-dropdown
-                    a#user-nav-link href="/#{@user["username"]}" Profile
-                    a#user-nav-link href="/logout" Logout
+                    img#user-nav-avatar src="/images/profile/#{@user["username"].downcase}.jpg" alt="Avatar"
+                    .dropdown-caret
+                #user-nav-dropdown
+                    menu#user-nav-menu
+                        li
+                            a.user-nav-link href="/#{@user["username"].downcase}" Profile
+                        li
+                            a.user-nav-link href="/logout" Logout
 
         - else
             #login-options
