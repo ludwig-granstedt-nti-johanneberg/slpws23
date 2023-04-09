@@ -1,4 +1,6 @@
-@use "manage_users";
+@use "users";
+@use "pokemon";
+
 @use "../../meta/color.scss" as color;
 @use "../../components/button.scss" as button;
 

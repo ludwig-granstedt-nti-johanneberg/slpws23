@@ -5,6 +5,8 @@ require 'slim'
 
 require './lib/database.rb'
 require './lib/user.rb'
+require './lib/pokemon.rb'
+require './lib/image.rb'
 
 ADMIN_PASSWORD = 'AsfaltsoppaMedKorvOchHjortronsylt'
 
@@ -28,8 +30,10 @@ helpers do
     end
 
     def get_all_pokemon
-        db = open_db(MAIN_DATABASE)
-        db.execute("SELECT * FROM PokemonSpecies")
+        pokemon = Pokemon.get_all_species()
+        pokemon.each do |species|
+            species["sprite_x"], species["sprite_y"] = Sprite.decode_pokemon_sprite(species["sprite"])
+        end
     end
 end
 
@@ -76,6 +80,13 @@ get '/admin/users' do
     slim :'admin/users', locals: {
         title: 'Manage users',
         users: Account.get_all_users()
+    }
+end
+
+get '/admin/pokemon/species' do
+    slim :'admin/pokemon/species', locals: {
+        title: 'Manage pokemon species',
+        pokemon: get_all_pokemon()
     }
 end
 

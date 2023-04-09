@@ -1,0 +1,21 @@
+span.pokemon-sprite {
+    display: block;
+
+    width: 40px;
+    height: 32px;
+
+    background-image: url("/sprites/pokemonicons-sheet.png");
+    background-repeat: no-repeat;
+}
+
+span.pokemon-type-icon {
+    display: inline-block;
+
+    width: 50px;
+    height: 20px;
+
+    // 534 * 208
+
+    background-image: url("/sprites/typeicons-sheet.png");
+    background-repeat: no-repeat;
+}

@@ -1,6 +1,12 @@
-aside#pokemon-list
-    h2 Pokemon
-    ul
-        - get_all_pokemon.each do |pokemon|
-            li.pokemon
-                p = pokemon
+main#team-creator-main
+    aside#pokemon-list
+        h2 Pokemon
+        ul
+            - get_all_pokemon.each do |pokemon|
+                li.pokemon
+                    span.pokemon-sprite style="background-position: #{pokemon["sprite_x"]}px #{pokemon["sprite_y"]}px;"
+                    label.pokemon-name = pokemon["name"]
+                    ul.pokemon-type-list 
+                        
+
+    section#team-creator

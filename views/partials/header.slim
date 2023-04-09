@@ -3,7 +3,7 @@ header
         img#logo src="/images/logo.png" alt="Logo"
     
     nav#main-nav
-        menu#quick-nav 
+        menu#quick-nav
             // TODO: Add links here
         form#search-form action="/search" method="get"
             input#search type="text" name="q"
@@ -14,7 +14,7 @@ header
                 #user-nav-button 
                     img#user-nav-avatar src="/images/profile/#{@user["username"].downcase}.jpg" alt="Avatar"
                     .dropdown-caret
-                #user-nav-dropdown
+                #user-nav-dropdown.hidden
                     menu#user-nav-menu
                         li
                             a.user-nav-link href="/#{@user["username"].downcase}" Profile
@@ -22,9 +22,9 @@ header
                             a.user-nav-link href="/logout" Logout
 
         - else
-            #login-options
-                a#user-nav-link href="/signin" Sign in
-                a#user-nav-link href="/signup" Sing up
+            nav#login-options
+                a.user-nav-link href="/signin" Sign in
+                a.user-nav-link href="/signup" Sing up
 
 
         

@@ -1,8 +1,8 @@
-section.main-content
+main.main-content
     h2 #{profile["username"]}'s teams
 
     - if is_logged_in? && profile["id"] == @user["id"]
-        a#new-team-button href="/teams/new" New team
+        a#new-team-button href="/teams/create" New team
 
     ul#teams-list
         - get_teams(profile).each do |team|

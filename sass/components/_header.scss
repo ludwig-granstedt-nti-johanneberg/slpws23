@@ -182,8 +182,6 @@ menu#user-nav-menu {
 
     overflow: hidden;
 
-    animation: open-dropdown 0.2s ease-in-out;
-
     li {
         width: 100%;
     }
@@ -205,13 +203,18 @@ menu#user-nav-menu {
     }
 }
 
-@keyframes open-dropdown {
-    0% {
-        display: block;
-        height: 0%;
+nav#login-options {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    & > * {
+        margin: 0 10px;
     }
 
-    100% {
-        height: fit-content;
+    a {
+        color: color.$text_inverted;
+        text-decoration: none;
     }
 }
