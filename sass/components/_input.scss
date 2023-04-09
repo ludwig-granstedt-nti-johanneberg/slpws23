@@ -1,0 +1,8 @@
+@use "../meta/color" as color;
+
+input[type="text"], input[type="password"], input[type="email"] {
+    width: 300px; 
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid color.$contrast4;
+}

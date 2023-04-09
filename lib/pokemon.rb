@@ -1,6 +1,12 @@
 require "./lib/database.rb"
 
+# Path: lib\pokemon.rb
+
+# This module contains all the methods for interacting with the Pokemon related tables in the database.
 module Pokemon
+    # This method gets a Pokemon species from the database. It also gets the types, moves, and abilities associated with the species.
+    #
+    # @param id [Integer] The ID of the Pokemon species to get.
     def Pokemon.get_species(id)
         db = open_db(MAIN_DATABASE)
 
@@ -12,6 +18,9 @@ module Pokemon
         species
     end
 
+    # This method gets all the Pokemon species from the database. It also gets the types, moves, and abilities associated with each species.
+    #
+    # @return [Array<Hash>] An array of hashes containing all the Pokemon species.
     def Pokemon.get_all_species()
         db = open_db(MAIN_DATABASE)
 

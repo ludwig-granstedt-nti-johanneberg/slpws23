@@ -11,11 +11,14 @@ menu.action-button-list
 h2 Users
 table
     tr
+        th Id
         th Username
         th Email
         th Role
+        th Actions
     - users.each do |user|
         tr
+        td = user["id"]
         td = user["username"]
         td = user["email"]
         td
@@ -23,5 +26,12 @@ table
                 = "Admin"
             - else
                 = "User"
+
+        td
+            form action="/admin/user" method="post" 
+                input type="hidden" name="authenticity_token" value="#{env['rack.session'][:csrf]}" /
+                input type="hidden" name="_method" value="delete" /
+                input type="hidden" name="id" value="#{user["id"]}" /
+                input.submit-button type="submit" value="Delete"
 
 script src="/scripts/manage_users.js" 

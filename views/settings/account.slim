@@ -1,0 +1,73 @@
+== slim :'partials/error_modal', locals: {error: error}
+
+h2 Account settings
+
+section.settings-section aria-labelledby="account-details-heading"
+    h3#account-details-heading Account details
+
+    form.settings-form action="/account/update" method="post" 
+        input type="hidden" name="_method" value="put" /
+        input type="hidden" name="authenticity_token" value="#{env['rack.session'][:csrf]}" /
+
+        .form-group
+            label for="username" Username
+            input#username.form-control type="text" name="username" value="#{@user["username"]}" /
+
+        .form-group
+            label for="email" Email
+            input#email.form-control type="email" name="email" value="#{@user["email"]}" /
+
+        .form-group
+            input.submit-button#update-information-submit type="submit" value="Uppdatera information"/
+
+section.settings-section aria-labelledby="change-password-heading"
+    h3#change-password-heading Change password
+
+    span#password-confirmation-error Password confirmation does not match password.
+
+    form.settings-form#update-password-form action="/account/update_password" method="post" 
+        input type="hidden" name="authenticity_token" value="#{env['rack.session'][:csrf]}" /
+        input type="hidden" name="_method" value="put" /
+
+        .form-group
+            label for="password" Password
+            input#password.form-control type="password" name="password" /
+
+        .form-group
+            label for="password-confirm" Password confirmation
+            input#password-confirm.form-control type="password" name="password_confirm" /
+
+        .form-group
+            label for="current-password" Current password
+            input#current-password.form-control type="password" name="current_password" /
+
+        .form-group
+            input.submit-button#update-password-submit type="submit" value="Uppdatera lösenord"/
+
+section.settings-section aria-labelledby="delete-account-heading"
+    h3#delete-account-heading Delete account
+
+    .form-group
+        button#delete-account-button type="button" Delete account
+
+#delete-account-modal
+    .modal-content.settings-modal
+        h3 Delete account
+        p Are you sure you want to delete your account? This action cannot be undone.
+        .modal-buttons
+            button#confirm-delete-button type="button" Delete
+            button#cancel-delete-button type="button" Cancel
+
+#password-confirmation-modal
+    .modal-content.settings-modal
+        h3 Password confirmation
+        p Please enter your password to confirm this action.
+        form#password-confirmation-form action="/account/delete" method="post"
+            input type="hidden" name="_method" value="delete" /
+            input type="hidden" name="authenticity_token" value="#{env['rack.session'][:csrf]}" /
+            .form-group
+                label for="delete-account-password-confirm" Password
+                input#delete-account-password-confirm.form-control type="password" name="password" /
+            .form-group#delete-account-button-container
+                input.submit-button#confirm-delete-button2 type="submit" value="Delete account"/
+                button#cancel-delete-button2 type="button" Cancel

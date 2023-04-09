@@ -3,6 +3,7 @@ main#signup
         h1 Sign up
 
         form#signup-form.account-form action="/signup" method="post"
+            input type="hidden" name="authenticity_token" value="#{env['rack.session'][:csrf]}" /
             .input-wrapper#username-wrapper
                 label#username-label for="username-input" Username
                 input#username-input type="text" name="username" placeholder="Username" required="true"

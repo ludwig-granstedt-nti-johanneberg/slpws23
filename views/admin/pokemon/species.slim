@@ -18,5 +18,6 @@ table
                 td
                     a.action-button href="/admin/pokemon/species/#{species["id"]}/" Edit
                     form action="/admin/pokemon/species/#{species["id"]}/delete" method="post"
+                        input type="hidden" name="authenticity_token" value="#{env['rack.session'][:csrf]}" /
                         input type="hidden" name="_method" value="delete"/
                         input.action-button type="submit" value="Delete"/
