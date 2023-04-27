@@ -1,5 +1,6 @@
 @use "components/header";
 @use "components/admin_nav";
+@use "components/input";
 
 @use "pages";
 
@@ -10,4 +11,8 @@
     margin: 0;
     
     font-family: font.$default-font;
+}
+
+html {
+    max-width: 100%;
 }

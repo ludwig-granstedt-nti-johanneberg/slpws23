@@ -3,6 +3,7 @@ main#signin
         h1 Sign in
 
         form#signin-form.account-form method="post" action="/signin"
+            input type="hidden" name="authenticity_token" value="#{env['rack.session'][:csrf]}" /
             .input-wrapper#username-input
                 label#username-label for="username-box" Username
                 input#username-box type="text" name="username" placeholder="Username" required="true"

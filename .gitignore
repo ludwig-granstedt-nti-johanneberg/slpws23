@@ -1,4 +1,5 @@
 **/temp*
+.yardoc
+node_modules
 
-public/css/style.css
-public/css/style.css.map
+public/css/*

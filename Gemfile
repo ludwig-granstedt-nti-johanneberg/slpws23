@@ -19,3 +19,7 @@ gem "bcrypt", "~> 3.1"
 gem "jwt", "~> 2.7"
 
 gem "down", "~> 5.4"
+
+gem "yard", "~> 0.9.29"
+
+gem "yard-sinatra", "~> 1.0"

@@ -1,0 +1,13 @@
+== slim :'partials/admin_nav'
+
+h1 Add new pokemon species
+
+form action="/admin/pokemon/species/new" method="post"
+    input type="hidden" name="authenticity_token" value="#{env['rack.session'][:csrf]}" /
+    label for="name" Name
+    input#name type="text" name="name" /
+    label for="types" Types
+    select#types name="types[]" multiple
+        - types.each do |type|
+            option value="#{type["id"]}" = type["name"]
+    input.action-button type="submit" value="Add"/

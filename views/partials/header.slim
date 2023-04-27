@@ -1,6 +1,7 @@
 header
     a#logo-link href="/" 
-        img#logo src="/images/logo.png" alt="Logo"
+        / img#logo src="/images/logo.png" alt="Logo"
+        h1#logo-text Logo
     
     nav#main-nav
         menu#quick-nav
@@ -17,14 +18,16 @@ header
                 #user-nav-dropdown.hidden
                     menu#user-nav-menu
                         li
-                            a.user-nav-link href="/#{@user["username"].downcase}" Profile
+                            a.user-nav-link#profile-link href="/#{@user["username"].downcase}" Profile
                         li
-                            a.user-nav-link href="/logout" Logout
+                            a.user-nav-link#settings-link href="/settings/account" Settings
+                        li
+                            a.user-nav-link#signout-link href="/singout" Sign out
 
         - else
             nav#login-options
-                a.user-nav-link href="/signin" Sign in
-                a.user-nav-link href="/signup" Sing up
+                a.user-nav-link#sign-in-link href="/signin" Sign in
+                a.user-nav-link#sign-up-link href="/signup" Sing up
 
 
         
