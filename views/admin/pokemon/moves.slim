@@ -1,0 +1,34 @@
+== slim :'partials/admin_nav'
+
+h1 Manage moves
+
+a href="/admin/pokemon/moves/new" New move
+
+table
+    thead
+        tr
+            th
+            th Name
+            th Type
+            th Category
+            th Power
+            th Accuracy
+            th PP
+            th Effect
+    tbody
+        - get_all_moves.each do |move|
+            tr
+                td
+                    form action="/admin/pokemon/moves/edit" method="get"
+                        input type="hidden" name="authenticity_token" value="#{env['rack.session'][:csrf]}" /
+                        input type="hidden" name="move" value="#{move["id"]}"
+                        input type="submit" value="Edit"
+                td = move["name"]
+                td
+                    == slim :'partials/type_icon', locals: {type: move["type"]}
+                td = move["category"]
+                td = move["power"]
+                td = move["accuracy"]
+                td = move["pp"]
+                td = move["effect"]
+

@@ -1,0 +1,45 @@
+== slim :'partials/admin_nav'
+
+main#new-move-main
+    h1 Add new move
+    form#new-move-form action="/admin/pokemon/moves/new" method="post"
+        input type="hidden" name="authenticity_token" value="#{env['rack.session'][:csrf]}" /
+        #left
+            #type-selector
+                h2 Type
+                #type-selector-container
+                    - get_all_types.each do |type|
+                        label
+                            input type="radio" name="type" value="#{type["id"]}"
+                            == slim :'partials/type_icon', locals: {type: type}
+
+            #category-selector
+                h2 Category
+                #category-selector-container
+                    label
+                        input type="radio" name="category" value="physical" checked="true"
+                        span Physical
+                    label
+                        input type="radio" name="category" value="special"
+                        span Special
+                    label
+                        input type="radio" name="category" value="status"
+                        span Status
+        #right
+            #name
+                h2 Name
+                input type="text" name="name"
+            #power
+                h2 Power
+                input type="number" name="power"
+            #accuracy
+                h2 Accuracy
+                input type="number" name="accuracy"
+            #pp
+                h2 PP
+                input type="number" name="pp"
+            #effect
+                h2 Effect
+                textarea name="effect" cols="30" rows="10"
+            #submit
+                input type="submit" value="Create move"

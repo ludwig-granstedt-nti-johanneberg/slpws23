@@ -8,6 +8,7 @@ require './lib/database.rb'
 require './lib/user.rb'
 require './lib/pokemon.rb'
 require './lib/pokemon/type.rb'
+require './lib/pokemon/move.rb'
 require './lib/image.rb'
 
 ADMIN_PASSWORD = 'AsfaltsoppaMedKorvOchHjortronsylt'
@@ -63,6 +64,14 @@ helpers do
     # TODO: Add documentation
     def get_type(id)
         Pokemon.get_type(id)
+    end
+
+    def get_all_moves
+        Pokemon.get_all_moves()
+    end
+
+    def get_move(id)
+        Pokemon.get_move(id)
     end
 end
 
@@ -161,6 +170,10 @@ end
 get '/admin/pokemon/types' do
     type = params[:type].to_i
 
+    if type == 0
+        type = nil
+    end
+
     slim :'admin/pokemon/types', locals: {
         title: 'Manage pokemon types',
         type: type,
@@ -172,8 +185,6 @@ post '/admin/pokemon/types/:trait/:method' do
     type = params[:type].to_i
     trait = params[:trait].to_sym
     method = params[:method].to_sym
-
-    p [type, trait, method]
 
     case trait
     when :weaknesses
@@ -197,6 +208,32 @@ post '/admin/generate_default_images' do
     end
 
     redirect '/admin/manage_users'
+end
+
+# TODO: Add documentation
+get '/admin/pokemon/moves' do
+    slim :'admin/pokemon/moves', locals: {
+        title: 'Manage pokemon moves'
+    }
+end
+
+# TODO: Add documentation
+get '/admin/pokemon/moves/new' do
+    slim :'admin/pokemon/moves/new', locals: {
+        title: 'New move'
+    }
+end
+
+# TODO: Add documentation
+post '/admin/pokemon/moves/new' do
+    Move.add_move(params["name"], params["type"], params["category"], params["power"], params["accuracy"], params["pp"], params["effect"])
+
+    redirect '/admin/pokemon/moves/new'
+end
+
+# TODO: Add documentation
+get '/admin/pokemon/moves/:id' do
+    # TODO: Add an ability to edit a move
 end
 
 # Allows a user to update details about their profile. This validates the authenticity token and then updates the user's details.

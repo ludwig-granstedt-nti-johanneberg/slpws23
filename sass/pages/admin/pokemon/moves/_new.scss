@@ -1,0 +1,45 @@
+main#new-move-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form#new-move-form {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+
+    max-width: 600px;
+    width: 100vw;
+
+    grid-template-areas:
+        "left right";
+}
+
+#left {
+    grid-area: left;
+
+    label {
+        width: fit-content;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    label:hover {
+        cursor: pointer;
+    }
+
+    .type-icon {
+        margin: 1px;
+    }
+}
+
+#right {
+    grid-area: right;
+}
+
+#type-selector-container, #category-selector-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}

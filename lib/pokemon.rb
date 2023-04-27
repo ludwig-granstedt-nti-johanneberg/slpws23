@@ -68,7 +68,13 @@ module Pokemon
     def Pokemon.get_all_moves
         db = open_db(MAIN_DATABASE)
 
-        db.execute("SELECT * FROM Moves;")
+        moves = db.execute("SELECT * FROM Moves;")
+
+        moves.each do |move|
+            move["type"] = db.execute("SELECT Types.name, Types.id FROM Types INNER JOIN Moves ON Types.id = Moves.type_id WHERE Moves.id = ?;", move["id"]).first
+        end
+
+        moves
     end
 
     # TODO: Add documentation
