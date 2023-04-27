@@ -63,7 +63,7 @@ RESTRICTED_PATHS = [
 ]
 
 before /#{RESTRICTED_PATHS.map{|str| "(#{str})"}.join('|')}/ do
-    redirect '/' unless logged_in?(request)
+    redirect '/forbidden' unless logged_in?(request)
 end
 
 before do
