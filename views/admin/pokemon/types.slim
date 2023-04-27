@@ -1,0 +1,80 @@
+form#type-selector-form action="/admin/pokemon/types" method="get" 
+    select#type-selector name="type"
+        option value="" selected=((type == nil) ? "selected" : "") -- Select a type --
+        - get_all_types.each do |other_type|
+            option value="#{other_type["id"]}" = other_type["name"]
+
+- unless type == nil
+    - type = get_type(type)
+    h2 = type["name"]
+    table
+        thead
+            tr
+                th Weaknesses
+                th Resistances
+                th Immunities
+
+        tbody
+            tr
+                td
+                    form action="/admin/pokemon/types/weaknesses/add" method="post"
+                        input type="hidden" name="authenticity_token" value="#{env['rack.session'][:csrf]}" /
+                        input type="hidden" name="type" value="#{type["id"]}"
+                        select name="weakness" 
+                            - get_all_types.each do |type|
+                                option value="#{type["id"]}" = type["name"]
+                        input type="submit" value="Add"
+
+                td
+                    form action="/admin/pokemon/types/resistances/add" method="post"
+                        input type="hidden" name="authenticity_token" value="#{env['rack.session'][:csrf]}" /
+                        input type="hidden" name="type" value="#{type["id"]}"
+                        select name="resistance" 
+                            - get_all_types.each do |type|
+                                option value="#{type["id"]}" = type["name"]
+                        input type="submit" value="Add"
+
+                td
+                    form action="/admin/pokemon/types/immunities/add" method="post"
+                        input type="hidden" name="authenticity_token" value="#{env['rack.session'][:csrf]}" /
+                        input type="hidden" name="type" value="#{type["id"]}"
+                        select name="immunity" 
+                            - get_all_types.each do |type|
+                                option value="#{type["id"]}" = type["name"]
+                        input type="submit" value="Add" 
+            tr
+                td
+                    ul.type-effectiveness-cell
+                        - type["weaknesses"].each do |weakness|
+                            li
+                                span = weakness["name"]
+                                form action="/admin/pokemon/types/weaknesses/remove" method="post"
+                                    input type="hidden" name="authenticity_token" value="#{env['rack.session'][:csrf]}" /
+                                    input type="hidden" name="type" value="#{type["id"]}"
+                                    input type="hidden" name="weakness" value="#{weakness["id"]}"
+                                    input type="submit" value="Remove"
+
+                td
+                    ul.type-effectiveness-cell
+                        - type["resistances"].each do |resistance|
+                            li
+                                span = resistance["name"]
+                                form action="/admin/pokemon/types/res" method="post" 
+                                    input type="hidden" name="authenticity_token" value="#{env['rack.session'][:csrf]}" /
+                                    input type="hidden" name="type" value="#{type["id"]}"
+                                    input type="hidden" name="resistance" value="#{resistance["id"]}"
+                                    input type="submit" value="Remove"
+
+                td
+                    ul.type-effectiveness-cell
+                        - type["immunities"].each do |immunity|
+                            li
+                                span = immunity["name"]
+                                form action="/admin/pokemon/types/immunities/remove" method="post"
+                                    input type="hidden" name="authenticity_token" value="#{env['rack.session'][:csrf]}" /
+                                    input type="hidden" name="type" value="#{type["id"]}"
+                                    input type="hidden" name="immunity" value="#{immunity["id"]}"
+                                    input type="submit" value="Remove"
+
+
+script src="/scripts/manage_types.js" 

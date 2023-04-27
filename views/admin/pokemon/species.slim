@@ -2,15 +2,20 @@
 
 h1 Manage pokemon species
 
+nav#pokemon-action-nav
+    a.action-button href="/admin/pokemon/species/new" Add new species
+
 table 
     thead
         tr
+            th Id
             th Name
             th Types
             th Actions
     tbody
         - pokemon.each do |species|
             tr
+                td = species["id"]
                 td = species["name"]
                 td
                     - species["types"].each do |type|

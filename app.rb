@@ -7,6 +7,7 @@ require 'rack/protection'
 require './lib/database.rb'
 require './lib/user.rb'
 require './lib/pokemon.rb'
+require './lib/pokemon/type.rb'
 require './lib/image.rb'
 
 ADMIN_PASSWORD = 'AsfaltsoppaMedKorvOchHjortronsylt'
@@ -48,10 +49,20 @@ helpers do
     # @see Sprite.decode_pokemon_sprite
     # @see Pokemon.get_all_species
     def get_all_pokemon
-        pokemon = Pokemon.get_all_species()
-        pokemon.each do |species|
-            species["sprite_x"], species["sprite_y"] = Sprite.decode_pokemon_sprite(species["sprite"])
-        end
+        Pokemon.get_all_species()
+    end
+
+    # This method gets a list of all the types.
+    #
+    # @return [Array<Hash>] An array of hashes containing all the types.
+    # @see Pokemon.get_all_types
+    def get_all_types
+        Pokemon.get_all_types()
+    end
+
+    # TODO: Add documentation
+    def get_type(id)
+        Pokemon.get_type(id)
     end
 end
 
@@ -109,6 +120,13 @@ before '/admin/*' do
     redirect '/forbidden' unless logged_in?(request) && Account.is_admin?(@user["id"])
 end
 
+# TODO: Add documentation
+get '/admin' do
+    slim :'admin/index', locals: {
+        title: 'Admin panel'
+    }
+end
+
 # Displays the admin panel page where you can manage users. This gets all users from the database and passes them to the template.
 # This route is only available to admins.
 #
@@ -137,6 +155,36 @@ get '/admin/pokemon/species' do
         title: 'Manage pokemon species',
         pokemon: get_all_pokemon()
     }
+end
+
+# TODO: Add documentation
+get '/admin/pokemon/types' do
+    type = params[:type].to_i
+
+    slim :'admin/pokemon/types', locals: {
+        title: 'Manage pokemon types',
+        type: type,
+    }
+end
+
+# TODO: Add documentation
+post '/admin/pokemon/types/:trait/:method' do
+    type = params[:type].to_i
+    trait = params[:trait].to_sym
+    method = params[:method].to_sym
+
+    p [type, trait, method]
+
+    case trait
+    when :weaknesses
+        Type.update_weakness(type, params[:weakness], method)
+    when :resistances
+        Type.update_resistance(type, params[:resistance], method)
+    when :immunities
+        Type.update_immunity(type, params[:immunity], method)
+    end
+
+    redirect "/admin/pokemon/types?type=#{type}"
 end
 
 # Allows the admin to generate default profile pictures for all users. This is mostly a development tool as users should get default profile pictures when they register.
